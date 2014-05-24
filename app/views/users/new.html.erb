@@ -1,0 +1,39 @@
+<h1>Register</h1>
+
+<div>
+<% if flash[:status] == TRUE %>
+		<p><%= flash[:alert] %></p>
+<% elsif flash[:status] == FALSE %>
+	<% flash[:alert].each do |error| %>
+		<p><%= error %></p>
+	<% end %>
+<% end %>
+</div>
+
+<%= form_for @user do |user| %>
+<div>
+	<%= user.label(:first_name, "First Name") %>
+	<%= user.text_field :first_name %>
+	</div>
+	<div>
+	<%= user.label(:last_name, "Last Name") %>
+	<%= user.text_field :last_name %>
+	</div>
+	<div>
+	<%= user.label(:password, "Password") %>
+	<%= user.text_field :password %>
+	</div>
+	<div>
+	<%= user.label(:password_confirmation, "Confirm Password") %>
+	<%= user.text_field :password_confirmation %>
+	</div>
+	<div>
+	<%= user.label(:email, "Email") %>
+	<%= user.text_field :email %>
+	</div>
+	<div>
+	<%= submit_tag "Register" %>
+	</div>
+<% end %>
+
+<p><%= link_to "Login", login_path %></p>
