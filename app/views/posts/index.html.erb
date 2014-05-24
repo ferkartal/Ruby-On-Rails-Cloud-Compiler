@@ -1,23 +1,30 @@
 <h1>Welcome to PERSON SAYFA</h1>
-<% $count =0 %>
-<% $parameter_file %>
+<% user=User.find(session[:user_id]) %>
 <% @posts.each do |post| %>
 
-    <% if post.id == $user_id %>
+    <% if post.id == user.id %>
         <% $count = $count + 1 %>
-        <p><%= post.content + "xxxxxxxx" %></p>
-        <p><% File.open('2.c', "w+") do |f| %><p>
+        <p><%= post.title+".c"  %></p>
+        <p><% words = post.content.split("\n") %></p>
+        <% i=0 %>
+        <% words.each do |v| %>
+            <p><%= i.to_s + "." + v %></p>
+            <% i= i+1 %>
+        <% end %>
+        <p><% File.open(post.title+".c", "w+") do |f| %><p>
             <p><%  f.write(post.content) %><p>
         <p><% end %></p>
           <%= link_to "Edit", edit_post_path(post) %> |
           <%= link_to "Delete", post, :confirm => "Are you sure?", :method => :delete%>
+          <p><%= link_to "Run", compiler_url(post.id) %></p>
         </p>
+
         <hr />
     <% end %>
 <% end %>
-<% if $count == 0 %>
+
     <p><%= link_to "Add a New Content", new_post_path %></p>
-<% end %>
-<p><%= link_to "Run", compiler_path %></p>
+
+
 
 <p><%= link_to "Logout", logout_path %></p>

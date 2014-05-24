@@ -1,1 +1,66 @@
 <h1>Compiler</h1>
+
+<h1><p> file</p></h1>
+<table border="1" style="width:300px">
+
+  <tr>
+    <td><%= @post.title+".c" %></td>
+  </tr>
+  <p><% words = @post.content.split("\n") %></p>
+  <% i=0 %>
+  <% words.each do |v| %>
+  <tr>
+    <td><%= i.to_s + "." + v %></td>
+    <% i= i+1 %>
+  </tr>
+  <% end %>
+</table>
+
+<% if FileTest.exists?(@post.title + "result.txt") %>
+    <h1><p> Compile Error</p></h1>
+    <table border="1" style="width:300px">
+
+        <p><% f= File.open(@post.title + "result.txt", "r") %><p>
+        <p><% f.each_line do |line| %><p>
+          <tr>
+            <td><%= line %></td>
+          </tr>
+        <p><% end %></p>
+    </table>
+    <% FileUtils.rm(@post.title + "result.txt") %>
+<% end %>
+
+
+<% if FileTest.exists?(@post.title + "result1.txt") %>
+    <h1><p> Link Error</p></h1>
+    <table border="1" style="width:300px">
+      <p><% f= File.open(@post.title + "result1.txt", "r") %><p>
+      <p><% f.each_line do |line| %><p>
+          <tr>
+            <td><%= line %></td>
+          </tr>
+          <p><% end %></p>
+    </table>
+    <% FileUtils.rm(@post.title + "result1.txt") %>
+<% end %>
+
+
+<% if FileTest.exists?(@post.title + "logfile.log") %>
+    <h1><p> Output</p></h1>
+    <table border="1" style="width:300px">
+      <p><% f= File.open(@post.title+"logfile.log", "r") %><p>
+      <p><% f.each_line do |line| %><p>
+          <tr>
+            <td><%= line %></td>
+          </tr>
+          <p><% end %></p>
+    </table>
+    <% FileUtils.rm(@post.title + "logfile.log") %>
+<% end %>
+
+<p><%= link_to "Edit", edit_post_path(@post) %>
+<%= link_to "Delete", @post, :confirm => "Are you sure?", :method => :delete%></p>
+
+
+
+# dosya isimlerini id ye göre yap#

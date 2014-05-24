@@ -1,6 +1,5 @@
-Yazilim2::Application.routes.draw do
-
- 	resources :users
+Son::Application.routes.draw do
+  resources :users
 	match '/register', to: 'users#new', via: :all
 	resources :sessions, :only => [:index, :new, :create, :destroy]
 	match 'login', to: 'sessions#new', via: :all

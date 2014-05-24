@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Yazilim2::Application.load_tasks
+Son::Application.load_tasks

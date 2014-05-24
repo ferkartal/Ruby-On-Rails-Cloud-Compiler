@@ -7,8 +7,7 @@ class SessionsController < ApplicationController
 		user = User.validate_login(params[:session][:email], params[:session][:password])
 		if user
 			session[:user_id] = user.id
-      $user_first_name = user.first_name
-      $user_id=user.id
+      
 			redirect_to posts_url(user.id)
 
 		else

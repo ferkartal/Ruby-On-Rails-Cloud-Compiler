@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  attr_accessor :post
   def index
 
     @posts = Post.all
@@ -11,8 +12,8 @@ class PostsController < ApplicationController
 
   def create
     @post =Post.new(params[:post])
-    #post[:user_id] = $user_id
-    @post.id= $user_id
+    user=User.find(session[:user_id])
+    @post.id= user.id
     if 	@post.save
       redirect_to posts_url(@post.id), :notice => "Your post was saved"
     else
@@ -39,16 +40,20 @@ class PostsController < ApplicationController
   end
 
   def compiler
-
-
-      if(system("gcc -c 2.c 2>result.txt")==false)#compileerror
+    user=User.find(session[:user_id])
+    @post=Post.find(user.id)
+      a = "gcc -c " + @post.title + ".c" +" 2>" +@post.title + "result.txt"
+      if(system(a)==false)#compileerror
 
       else
-        if(system("gcc 2.o -o a 2>result1.txt")==false)#linkerror
+        a="gcc " + @post.title + ".o -o "+@post.title+" 2>" +@post.title + "result1.txt"
+        if(system(a)==false)#linkerror
         else
           if
-            output = `./a>>logfile.log`#sonuc
-            puts "#{output}"
+            a="./"+@post.title+">>"+@post.title+"logfile.log"
+            if(system(a)==false)
+
+            end
           end
         end
       end
@@ -59,6 +64,7 @@ class PostsController < ApplicationController
   def destroy
 
     @post=Post.find(params[:id])
+    FileUtils.rm(@post.title+".c")
     @post.destroy
     redirect_to posts_url(@post.id), :notice => "Your post has been deleted"
 

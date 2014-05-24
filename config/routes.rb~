@@ -1,15 +1,16 @@
-Yazilim2::Application.routes.draw do
- resources :users
-	match '/register', to: 'users#new', via: :all
-	resources :sessions, :only => [:new, :create, :destroy]
-	match 'login', to: 'sessions#new', via: :all
-	match 'logout', to: 'sessions#destroy', via: :all
-	
+Son::Application.routes.draw do
+  get "posts/new"
+  get "posts/index"
+  get "posts/show"
+  get "sessions/new"
+  get "users/index"
+  get "users/show"
+  get "users/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root :to => 'users#index'
+  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
 
 		else
 			@user = User.find(session[:user_id])
-			$user_first_name = @user.first_name
-      $user_id=@user.id
+
 		end
 	end
 end

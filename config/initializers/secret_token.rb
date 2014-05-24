@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Yazilim2::Application.config.secret_key_base = 'e7e544aaaeb0822cc47e61c394da96d79059b17a4aa7c1d7235b0dc04376892c5fb9d4efb42f239418585ad67bd796611fa71f0ee54c4ffd5edf549a7baa8131'
+Son::Application.config.secret_key_base = '60588dcbe9d763aabcfbdd4df50755b2bd6200b58c58bca85ffd5ed7397b086186fdb39b95674de39d0d26d1077ddb935fb7ff4252efa9f32c3d1f58f8bd832f'
