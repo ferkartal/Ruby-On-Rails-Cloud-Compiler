@@ -42,15 +42,15 @@ class PostsController < ApplicationController
   def compiler
     user=User.find(session[:user_id])
     @post=Post.find(user.id)
-      a = "gcc -c " + @post.title + ".c" +" 2>" +@post.title + "result.txt"
+      a = "gcc -c " + @post.id.to_s + ".c" +" 2>" +@post.id.to_s + "result.txt"
       if(system(a)==false)#compileerror
 
       else
-        a="gcc " + @post.title + ".o -o "+@post.title+" 2>" +@post.title + "result1.txt"
+        a="gcc " + @post.id.to_s + ".o -o "+@post.id.to_s+" 2>" +@post.id.to_s + "result1.txt"
         if(system(a)==false)#linkerror
         else
           if
-            a="./"+@post.title+">>"+@post.title+"logfile.log"
+            a="./"+@post.id.to_s+">>"+@post.id.to_s+"logfile.log"
             if(system(a)==false)
 
             end
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   def destroy
 
     @post=Post.find(params[:id])
-    FileUtils.rm(@post.title+".c")
+    FileUtils.rm(@post.id+".c")
     @post.destroy
     redirect_to posts_url(@post.id), :notice => "Your post has been deleted"
 
