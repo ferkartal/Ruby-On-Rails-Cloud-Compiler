@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
       $user_first_name = user.first_name
       $user_id=user.id
-			redirect_to :controller => 'posts'
+			redirect_to posts_url(user.id)
+
 		else
 			flash[:status] = FALSE
 			flash[:alert] = 'Invalid username and password!'

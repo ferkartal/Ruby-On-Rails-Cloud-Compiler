@@ -5,6 +5,7 @@ Yazilim2::Application.routes.draw do
 	resources :sessions, :only => [:index, :new, :create, :destroy]
 	match 'login', to: 'sessions#new', via: :all
 	match 'logout', to: 'sessions#destroy', via: :all
+  match 'compiler', to: 'posts#compiler', via: :all
   resources :posts
 	
   # The priority is based upon order of creation: first created -> highest priority.

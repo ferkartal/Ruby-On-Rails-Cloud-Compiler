@@ -1,0 +1,3 @@
+2.o: In function `main':
+2.c:(.text+0x1e): undefined reference to `pows'
+collect2: ld returned 1 exit status
