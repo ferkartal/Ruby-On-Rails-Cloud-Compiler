@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Son::Application.config.secret_key_base = '60588dcbe9d763aabcfbdd4df50755b2bd6200b58c58bca85ffd5ed7397b086186fdb39b95674de39d0d26d1077ddb935fb7ff4252efa9f32c3d1f58f8bd832f'
+Ne::Application.config.secret_key_base = 'a0cba22b87b61b61974d800c675d4cf9565fade42f2f61949595e20d900adff32548f557a8ba77d7359cc78f283971ac33e6a5629e609034577b5ad3fdef75d6'

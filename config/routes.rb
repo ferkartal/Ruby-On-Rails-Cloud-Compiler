@@ -1,12 +1,12 @@
-Son::Application.routes.draw do
-  resources :users
-	match '/register', to: 'users#new', via: :all
-	resources :sessions, :only => [:index, :new, :create, :destroy]
-	match 'login', to: 'sessions#new', via: :all
-	match 'logout', to: 'sessions#destroy', via: :all
-  match 'compiler', to: 'posts#compiler', via: :all
+Ne::Application.routes.draw do
+  resources :users, :posts
+  match '/register', to: 'users#new', via: :all
+  resources :sessions, :only => [:index, :new, :create, :destroy]
+  match 'login', to: 'sessions#new', via: :all
+  match 'logout', to: 'sessions#destroy', via: :all
+
   resources :posts
-	
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

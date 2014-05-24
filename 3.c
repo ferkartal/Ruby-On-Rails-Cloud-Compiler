@@ -1,4 +1,8 @@
 #include<stdio.h>
+#include "1.h"
+
 int main(){
-printf("nurx");
+
+	printf("%d\n",myFunc(3,5));
+
 }

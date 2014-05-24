@@ -10,6 +10,8 @@
         </ul>
     <% end %>
     <p>
+      <% user=User.find(session[:user_id]) %>
+      <%= f.hidden_field :us_id, :value => user.id %>
       <%= f.label :title %>
       <%= f.text_field :title %>
     </p>

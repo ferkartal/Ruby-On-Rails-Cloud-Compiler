@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   def create
     @post =Post.new(params[:post])
     user=User.find(session[:user_id])
-    @post.id= user.id
+    @post.us_id= user.id
     if 	@post.save
       redirect_to posts_url(@post.id), :notice => "Your post was saved"
     else
@@ -27,6 +27,43 @@ class PostsController < ApplicationController
 
   def show
     @post =Post.find(params[:id])
+    if FileTest.exists?(@post.us_id.to_s + ".h")
+      b = "gcc -c " + @post.us_id.to_s + ".h"+" 2>" +@post.us_id.to_s + "resulth.txt"
+      a = "gcc -c " + @post.us_id.to_s + ".c" +" 2>" +@post.us_id.to_s + "result.txt"
+
+      if(system(a)==false||system(b)==false)#compileerror
+
+      else
+        a="gcc " + @post.us_id.to_s + ".o -o "+@post.us_id.to_s+ " "+@post.us_id.to_s + ".h"+" 2>" +@post.us_id.to_s + "result1.txt"
+        if(system(a)==false)#linkerror
+        else
+          if
+          a="./"+@post.us_id.to_s+">>"+@post.us_id.to_s+"logfile.log"
+            if(system(a)==false)
+
+            end
+          end
+        end
+      end
+    else
+      a = "gcc -c " + @post.us_id.to_s + ".c" +" 2>" +@post.us_id.to_s + "result.txt"
+
+      if(system(a)==false)#compileerror
+
+      else
+        a="gcc " + @post.us_id.to_s + ".o -o "+@post.us_id.to_s+" 2>" +@post.us_id.to_s + "result1.txt"
+        if(system(a)==false)#linkerror
+        else
+          if
+          a="./"+@post.us_id.to_s+">>"+@post.us_id.to_s+"logfile.log"
+            if(system(a)==false)
+
+            end
+          end
+        end
+      end
+
+    end
 
   end
 
@@ -39,32 +76,15 @@ class PostsController < ApplicationController
     end
   end
 
-  def compiler
-    user=User.find(session[:user_id])
-    @post=Post.find(user.id)
-      a = "gcc -c " + @post.id.to_s + ".c" +" 2>" +@post.id.to_s + "result.txt"
-      if(system(a)==false)#compileerror
-
-      else
-        a="gcc " + @post.id.to_s + ".o -o "+@post.id.to_s+" 2>" +@post.id.to_s + "result1.txt"
-        if(system(a)==false)#linkerror
-        else
-          if
-            a="./"+@post.id.to_s+">>"+@post.id.to_s+"logfile.log"
-            if(system(a)==false)
-
-            end
-          end
-        end
-      end
-#yapilacaklar 1.title eklencek ki doysa isimleri o title a göre 2.sonuclar gösterildikten sonra tüm dosyalar silincek
-
-  end
 
   def destroy
 
     @post=Post.find(params[:id])
-    FileUtils.rm(@post.id+".c")
+    if (post.title.last=='c')
+      FileUtils.rm(@post.us_id.to_s+".c")
+    else
+      FileUtils.rm(@post.us_id.to_s+".h")
+    end
     @post.destroy
     redirect_to posts_url(@post.id), :notice => "Your post has been deleted"
 
